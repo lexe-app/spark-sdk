@@ -11,9 +11,10 @@ pub fn compile_protos(proto: impl AsRef<Path>) -> io::Result<()> {
     let proto_dir = proto_path
         .parent()
         .expect("proto file should reside in a directory");
-    let target_family =
-        std::env::var("CARGO_CFG_TARGET_FAMILY").expect("CARGO_CFG_TARGET_FAMILY not set");
-    let target_os = std::env::var("CARGO_CFG_TARGET_OS").expect("CARGO_CFG_TARGET_OS not set");
+    // `target_family` is unset on some targets (e.g. SGX), so default it rather
+    // than panicking; an absent family is never wasm.
+    let target_family = std::env::var("CARGO_CFG_TARGET_FAMILY").unwrap_or_default();
+    let target_os = std::env::var("CARGO_CFG_TARGET_OS").unwrap_or_default();
     let is_wasm = target_family == "wasm" && target_os == "unknown";
 
     tonic_build::configure()
