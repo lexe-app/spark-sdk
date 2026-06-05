@@ -49,9 +49,7 @@ tonic = { workspace = true, features = [
     "codegen",
     "prost",
     "tls",
-    "tls-roots",
     "tls-webpki-roots",
-    "transport",
 ] }
 
 # WASM dependencies
