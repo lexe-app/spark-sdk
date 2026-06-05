@@ -149,3 +149,7 @@ Contributions are always welcome. Please read our [contribution guide](CONTRIBUT
 
 
 
+
+## License
+
+Please see [LICENSE.md](LICENSE.md) for license information.
